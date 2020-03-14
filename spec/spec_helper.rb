@@ -12,7 +12,8 @@ RSpec.configure do |config|
   require 'capybara/rspec'
 
   config.before(:each, type: :system) do
-    driven_by :selenium_chrome_headless
+    # driven_by :selenium_chrome_headless
+    driven_by :selenium_chrome
     FactoryBot.reload
   end
 end
