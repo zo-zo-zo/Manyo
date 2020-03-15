@@ -211,3 +211,8 @@ ja:
     task_deadline: 終了期限
     task_status: 状態
     task_priority: 優先順位
+    tasks_index: タスク一覧
+    tasks_edit: タスクを編集する
+    comfirmation: 以下の内容で、送信する。
+    new_task: タスクを作成する
+    task_detail_page: タスク詳細画面
