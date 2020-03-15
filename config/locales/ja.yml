@@ -205,3 +205,9 @@ ja:
       long: "%Y/%m/%d %H:%M"
       short: "%m/%d %H:%M"
     pm: 午後
+  view:
+    task_name: タスク名
+    task_detail: タスク詳細
+    task_deadline: 終了期限
+    task_status: 状態
+    task_priority: 優先順位

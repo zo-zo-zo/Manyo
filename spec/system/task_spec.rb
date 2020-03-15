@@ -30,9 +30,10 @@ RSpec.describe 'タスク管理機能', type: :system do
     context '必要項目を入力して、createボタンを押した場合' do
       it 'データが保存されること'do
         visit new_task_path
-        fill_in 'task_title', with:'練習'
+        fill_in 'task_title', with:'練習タイトル'
+        fill_in 'task_content', with:'練習コンテント'
         click_on('登録する')
-        expect(page).to have_content '練習'
+        expect(page).to have_content '練習タイトル'
         click_on('登録する')
         # save_and_open_page
       end
