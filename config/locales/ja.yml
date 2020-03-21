@@ -205,3 +205,21 @@ ja:
       long: "%Y/%m/%d %H:%M"
       short: "%m/%d %H:%M"
     pm: 午後
+  view:
+    task_name: タスク名
+    task_detail: タスク詳細
+    task_deadline: 終了期限
+    task_status: 状態
+    task_priority: 優先順位
+    tasks_index: タスク一覧
+    tasks_edit: タスクを編集する
+    comfirmation: 以下の内容で、送信する。
+    new_task: 新しくタスクを作成する
+    task_detail_page: タスク詳細画面
+    tasks_index_back: タスク一覧画面にもどる
+    detail: 詳細
+    edit: 編集
+    destroy: 削除
+    comfirm_back: 戻る
+    comfirm_create: 登録する
+    error_count: 件のエラーがあります。
