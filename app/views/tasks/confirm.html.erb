@@ -10,6 +10,6 @@
   <p><%=t('view.task_deadline')%>:<%= @task.deadline %></p>
   <p><%=t('view.task_status')%>:<%= @task.status %></p>
   <p><%=t('view.task_priority')%>:<%= @task.priority %></p>
-  <%= form.submit  "登録する" %>
-  <%= form.submit "戻る", name: 'back' %>
+  <%= form.submit t('view.comfirm_create') %>
+  <%= form.submit t('view.comfirm_back'), name: 'back' %>
 <% end %>

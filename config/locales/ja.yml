@@ -214,5 +214,12 @@ ja:
     tasks_index: タスク一覧
     tasks_edit: タスクを編集する
     comfirmation: 以下の内容で、送信する。
-    new_task: タスクを作成する
+    new_task: 新しくタスクを作成する
     task_detail_page: タスク詳細画面
+    tasks_index_back: タスク一覧画面にもどる
+    detail: 詳細
+    edit: 編集
+    destroy: 削除
+    comfirm_back: 戻る
+    comfirm_create: 登録する
+    error_count: 件のエラーがあります。
