@@ -46,7 +46,7 @@ class TasksController < ApplicationController
     redirect_to tasks_path, notice:"タスクを削除しました！"
   end
 
-  def confirm
+  def confirm    
     @task = Task.new(task_params)
     render :new if @task.invalid?
   end
