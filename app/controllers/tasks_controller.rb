@@ -19,13 +19,19 @@ class TasksController < ApplicationController
         @tasks = Task.where("title LIKE ?", "%#{ params[:title] }%")
   # もし渡されたパラメータがステータスのみだった場合
       elsif params[:title].blank? && params[:status]
-        # カラムのデータ型がintegerのためあいまい検索でエラーが出たため下の書き方でパラメーターをとる
+        # カラムのデータ型がintegerのため、あいまい検索でエラーが出た。そのため下の書き方でパラメーターをとる
         @tasks = Task.where(status: params[:status])
   # もし渡されたパラメータがタイトルとステータス両方だった場合
       else
         # タイトルとステータスの両方検索する場合にはwhere句とwhere句を繋げる
         @tasks = Task.where("title LIKE ?" , "%#{ params[:title] }%").where(status: params[:status])
       end
+    end
+
+    if params[:sort_priority]
+      @tasks = Task.all.order(priority:"ASC")
+    elsif
+      @tasks = Task.all
     end
   end
 
