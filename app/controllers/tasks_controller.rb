@@ -5,8 +5,27 @@ class TasksController < ApplicationController
     @tasks = Task.recent
     if params[:sort_expired]
       @tasks = Task.all.order(deadline:"DESC")
-    else
+    elsif
       @tasks = Task.all
+    end
+
+    if params[:search]
+  # 渡された値が空の場合
+      if params[:title].blank? && params[:status].blank?
+        @tasks = Task.all
+  # もし渡されたパラメータがタイトルのみだった場合
+      elsif params[:title] && params[:status].blank?
+        # あいまい検索％％をつけることでそういう認識になる
+        @tasks = Task.where("title LIKE ?", "%#{ params[:title] }%")
+  # もし渡されたパラメータがステータスのみだった場合
+      elsif params[:title].blank? && params[:status]
+        # カラムのデータ型がintegerのためあいまい検索でエラーが出たため下の書き方でパラメーターをとる
+        @tasks = Task.where(status: params[:status])
+  # もし渡されたパラメータがタイトルとステータス両方だった場合
+      else
+        # タイトルとステータスの両方検索する場合にはwhere句とwhere句を繋げる
+        @tasks = Task.where("title LIKE ?" , "%#{ params[:title] }%").where(status: params[:status])
+      end
     end
   end
 
@@ -46,7 +65,7 @@ class TasksController < ApplicationController
     redirect_to tasks_path, notice:"タスクを削除しました！"
   end
 
-  def confirm    
+  def confirm
     @task = Task.new(task_params)
     render :new if @task.invalid?
   end
