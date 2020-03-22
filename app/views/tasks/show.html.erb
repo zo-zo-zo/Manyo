@@ -1,6 +1,7 @@
-<<h1><%=t('view.task_detail_page')%></h1>
+<h1><%=t('view.task_detail_page')%></h1>
 <p><%=t('view.task_name')%>: <%= @task.title %></p>
 <p><%=t('view.task_detail')%>: <%= @task.content %></p>
 <p><%=t('view.task_deadline')%>: <%= @task.deadline %></p>
 <p><%=t('view.task_status')%>: <%= @task.status %></p>
 <p><%=t('view.task_priority')%>: <%= @task.priority %></p>
+<%= link_to t('view.tasks_index_back'), tasks_path ,class:'btn btn-warning'%>
