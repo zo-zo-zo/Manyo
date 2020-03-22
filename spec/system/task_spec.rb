@@ -21,8 +21,9 @@ RSpec.describe 'タスク管理機能', type: :system do
         task_list = all('.task_row')
         # タスク一覧を配列として取得するため、View側でidを振っておく
         # binding.irb
-        expect(task_list[0]).to have_content @task2.title
-        expect(task_list[1]).to have_content @task1.title
+        expect(task_list[0]).to have_content @task1.title
+        expect(task_list[1]).to have_content @task2.title
+        save_and_open_page
       end
     end
   end
@@ -30,9 +31,10 @@ RSpec.describe 'タスク管理機能', type: :system do
     context '必要項目を入力して、createボタンを押した場合' do
       it 'データが保存されること'do
         visit new_task_path
-        fill_in 'task_title', with:'練習'
+        fill_in 'task_title', with:'練習タイトル'
+        fill_in 'task_content', with:'練習コンテント'
         click_on('登録する')
-        expect(page).to have_content '練習'
+        expect(page).to have_content '練習タイトル'
         click_on('登録する')
         # save_and_open_page
       end
