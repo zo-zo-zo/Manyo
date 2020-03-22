@@ -2,37 +2,28 @@ class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
   def index
-    @tasks = Task.recent
   # 終了期限でソート
     if params[:sort_expired]
       @tasks = Task.all.order(deadline:"DESC").page(params[:page])
-    elsif
-      @tasks = Task.all.page(params[:page])
-    end
-
-    if params[:search]
-  # 渡された値が空の場合
-      if params[:title].blank? && params[:status].blank?
-        @tasks = Task.all.page(params[:page])
-  # もし渡されたパラメータがタイトルのみだった場合
-      elsif params[:title] && params[:status].blank?
-        # あいまい検索％％をつけることでそういう認識になる
-        @tasks = Task.where("title LIKE ?", "%#{ params[:title] }%")
-  # もし渡されたパラメータがステータスのみだった場合
-      elsif params[:title].blank? && params[:status]
-        # カラムのデータ型がintegerのため、あいまい検索でエラーが出た。そのため下の書き方でパラメーターをとる
-        @tasks = Task.where(status: params[:status]).page(params[:page])
-  # もし渡されたパラメータがタイトルとステータス両方だった場合
-      else
-        # タイトルとステータスの両方検索する場合にはwhere句とwhere句を繋げる
-        @tasks = Task.where("title LIKE ?" , "%#{ params[:title] }%").where(status: params[:status]).page(params[:page])
-      end
-    end
   # 優先順位でソート
-    if params[:sort_priority]
-      @tasks = Task.all.order(priority:"ASC")
-    elsif
-      @tasks = Task.all.page(params[:page])
+    elsif params[:sort_priority]
+      @tasks = Task.all.order(priority:"ASC").page(params[:page])
+    # elsif params[:search]←この記載いらない
+  # 渡された値が空の場合　⇨　# 作成日時の降順での並び替え
+    elsif params[:title].blank? && params[:status].blank?
+      @tasks = Task.recent.page(params[:page])
+  # もし渡されたパラメータがタイトルのみだった場合
+    elsif params[:title] && params[:status].blank?
+          # あいまい検索は"％％""をつけることでその認識になる
+      @tasks = Task.where("title LIKE ?", "%#{ params[:title] }%").page(params[:page])
+  # もし渡されたパラメータがステータスのみだった場合
+    elsif params[:title].blank? && params[:status]
+          # カラムのデータ型がintegerのため、あいまい検索でエラーが出た。そのため下の書き方でパラメーターをとる
+      @tasks = Task.where(status: params[:status]).page(params[:page])
+  # もし渡されたパラメータがタイトルとステータス両方だった場合
+    elsif params[:title] && params[:status]
+  # タイトルとステータスの両方検索する場合にはwhere句とwhere句を繋げる
+      @tasks = Task.where("title LIKE ?" , "%#{ params[:title] }%").where(status: params[:status]).page(params[:page])
     end
   end
 
