@@ -4,6 +4,7 @@ RSpec.describe 'タスク管理機能', type: :system do
     # あらかじめタスク一覧のテストで使用するためのタスクを二つ作成する
     @task1 = FactoryBot.create(:task)
     @task2 = FactoryBot.create(:second_task)
+    @task3 = FactoryBot.create(:third_task)
   end
   describe 'タスク一覧画面' do
     context 'タスクを作成した場合' do
@@ -21,19 +22,31 @@ RSpec.describe 'タスク管理機能', type: :system do
         task_list = all('.task_row')
         # タスク一覧を配列として取得するため、View側でidを振っておく
         # binding.irb
-        expect(task_list[0]).to have_content @task2.title
-        expect(task_list[1]).to have_content @task1.title
-        # save_and_open_page
+        expect(task_list[0]).to have_content @task3.title
+        expect(task_list[1]).to have_content @task2.title
+        expect(task_list[2]).to have_content @task1.title
       end
     end
     context '終了期限でソートするボタンを押した場合' do
       it 'タスクが終了期限の降順に並んでいること' do
         visit tasks_path
         click_on('終了期限でソートする')
-        task_list = all('.task_row')
         sleep 0.5
-        expect(task_list[0]).to have_content '4-25'
-        # expect(task_list[1]).to have_content 'コンテント２'
+        task_list = all('.task_row')
+        expect(task_list[0]).to have_content @task2.title
+        expect(task_list[1]).to have_content @task1.title
+        expect(task_list[2]).to have_content @task3.title
+      end
+    end
+    context '優先順位の高い順にソートするボタンを押した場合' do
+      it 'タスクが優先順位の高い順に並んでいること' do
+        visit tasks_path
+        click_on('優先順位の高い順にソートする')
+        sleep 0.5
+        task_list = all('.task_row')
+        expect(task_list[0]).to have_content @task1.title
+        expect(task_list[1]).to have_content @task3.title
+        expect(task_list[2]).to have_content @task2.title
       end
     end
   end
