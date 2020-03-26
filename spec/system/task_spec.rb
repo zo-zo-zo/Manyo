@@ -23,7 +23,17 @@ RSpec.describe 'タスク管理機能', type: :system do
         # binding.irb
         expect(task_list[0]).to have_content @task2.title
         expect(task_list[1]).to have_content @task1.title
-        save_and_open_page
+        # save_and_open_page
+      end
+    end
+    context '終了期限でソートするボタンを押した場合' do
+      it 'タスクが終了期限の降順に並んでいること' do
+        visit tasks_path
+        click_on('終了期限でソートする')
+        task_list = all('.task_row')
+        sleep 0.5
+        expect(task_list[0]).to have_content '4-25'
+        # expect(task_list[1]).to have_content 'コンテント２'
       end
     end
   end
